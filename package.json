@@ -1,7 +1,9 @@
 {
   "scripts": {
     "start": "node backend/server.js",
-    "build": "cd frontend && npm install && npm run build && cd ../backend && npm install",
-    "deploy": "vercel --prod"
+    "build": "cd frontend && npm install && npm run build && cd ../backend && npm install"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }

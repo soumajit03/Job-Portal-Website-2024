@@ -19,12 +19,13 @@ app.listen(process.env.PORT,()=>{
 });
 
 if (process.env.NODE_ENV === 'production') {
-    // Serve static files from the frontend dist directory
     app.use(express.static(path.join(__dirname, '../frontend/dist')));
-
-    // Handle all other routes by serving the index.html
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, '../frontend/dist', 'index.html'));
+    
+    app.get('*', (req, res, next) => {
+        if (req.url.startsWith('/api/')) {
+            return next();
+        }
+        res.sendFile(path.resolve(__dirname, '../frontend/dist/index.html'));
     });
 }
 
