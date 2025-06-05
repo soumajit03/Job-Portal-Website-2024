@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import app from "./app.js";
 import cloudinary from 'cloudinary';
 import fs from 'fs';
+import bcrypt from 'bcryptjs';
 
 // Error handling
 process.on('uncaughtException', (err) => {
