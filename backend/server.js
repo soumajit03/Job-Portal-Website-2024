@@ -1,12 +1,23 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
 import app from "./app.js";
 import cloudinary from 'cloudinary';
 import fs from 'fs';
 
+// Error handling
+process.on('uncaughtException', (err) => {
+    console.log(`Error: ${err.message}`);
+    console.log('Shutting down the server due to Uncaught Exception');
+    process.exit(1);
+});
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Load env vars
+dotenv.config({ path: './backend/config/config.env' });
 
 cloudinary.v2.config({
     cloud_name:process.env.CLOUDINARY_CLIENT_NAME,
@@ -29,8 +40,14 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-// Add error handling
+// Global error handler
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).send('Something broke!');
+    res.status(500).json({
+        success: false,
+        message: 'Internal Server Error',
+        error: process.env.NODE_ENV === 'development' ? err.message : {}
+    });
 });
+
+export default app;
