@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "start": "node backend/server.js",
+    "build": "cd frontend && npm install && npm run build && cd ../backend && npm install",
+    "deploy": "vercel --prod"
+  }
+}
