@@ -19,18 +19,13 @@ app.listen(process.env.PORT,()=>{
 });
 
 if (process.env.NODE_ENV === 'production') {
-    const buildPath = path.resolve(__dirname, '../frontend/build');
-    
-    // Ensure the path exists
-    if (fs.existsSync(buildPath)) {
-        app.use(express.static(buildPath));
-        
-        app.get('*', (req, res) => {
-            if (!req.path.startsWith('/api/')) {
-                res.sendFile(path.join(buildPath, 'index.html'));
-            }
-        });
-    }
+    // Serve static files from the frontend dist directory
+    app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+    // Handle all other routes by serving the index.html
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, '../frontend/dist', 'index.html'));
+    });
 }
 
 // Add error handling
