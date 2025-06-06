@@ -28,3 +28,15 @@
 
 ### Additional Features
 - Cloudinary (cloud storage)
+
+### Codebase
+https://github.com/user-attachments/assets/1d1915de-9e4b-4e43-b2d6-0047f77339f5
+
+### Job Seeker Part
+https://github.com/user-attachments/assets/58b2baf2-8a42-43ea-8021-263bccda028e
+
+### Employer Part
+https://github.com/user-attachments/assets/5eec189e-3680-466a-a28c-7da6f8871710
+
+
+
